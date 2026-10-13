@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mandi Price Tracker · Daily APMC crop prices</title>
+  <meta name="description" content="Daily mandi prices from Maharashtra APMCs: trends, market comparison, watchlist and price alerts.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231e4d34'/%3E%3Cpath d='M7 22l6-7 4 4 8-9' fill='none' stroke='%23f2b33d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/app.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#view">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#/" data-testid="home"><span class="logo" aria-hidden="true"></span><span>Mandi <b>Price Tracker</b></span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#/" data-nav="board">Board</a>
+      <a href="#/watchlist" data-nav="watchlist">Watchlist</a>
+      <a href="#/alerts" data-nav="alerts" class="bell-link">Alerts <span class="badge" id="unread" hidden data-testid="unread">0</span></a>
+      <a href="#/admin" data-nav="admin" id="admin-link" hidden>Imports</a>
+      <a href="#/login" id="login-link" class="btn small primary">Sign in</a>
+      <button class="link" id="logout" type="button" hidden>Sign out</button>
+    </nav>
+  </header>
+  <main id="view" tabindex="-1"></main>
+  <footer class="footer">
+    Prices are in ₹ per quintal (100 kg) as published by APMC markets on Agmarknet · <span id="source-note">Built-in sample data</span>
+  </footer>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <div class="tooltip" id="tooltip" role="status" hidden></div>
+</body>
+</html>

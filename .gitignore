@@ -1,0 +1,11 @@
+target/
+*.log
+.idea/
+.vscode/
+*.iml
+.DS_Store
+.env
+e2e/node_modules/
+e2e/test-results/
+e2e/playwright-report/
+

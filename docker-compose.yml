@@ -1,0 +1,39 @@
+# Runs the app against MySQL 8: docker compose up --build  ->  http://localhost:8080
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: mandi
+      MYSQL_USER: mandi
+      MYSQL_PASSWORD: ${DB_PASSWORD:-mandi}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-umandi", "-p${DB_PASSWORD:-mandi}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: mysql
+      DB_URL: jdbc:mysql://db:3306/mandi?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USER: mandi
+      DB_PASSWORD: ${DB_PASSWORD:-mandi}
+      JWT_SECRET: ${JWT_SECRET:-change-me-to-a-long-random-string-of-32-chars}
+      PRICE_SOURCE: ${PRICE_SOURCE:-sample}
+      DATA_GOV_API_KEY: ${DATA_GOV_API_KEY:-}
+      DATA_GOV_STATE: ${DATA_GOV_STATE:-Maharashtra}
+      DEMO_DATA: ${DEMO_DATA:-true}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@mandi.local}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-Admin@12345}
+    ports:
+      - "8080:8080"
+
+volumes:
+  db-data:
