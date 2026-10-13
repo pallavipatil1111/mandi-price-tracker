@@ -15,6 +15,7 @@ test("watching needs an account; after signing up the star works and the watchli
   await form.getByLabel("Email").fill(`p-${Date.now()}@example.com`);
   await form.getByLabel("Password").fill("secret123");
   await form.getByRole("button", { name: "Create account" }).click();
+  await expect(page.locator("#logout")).toBeVisible(); // signed in (token stored) before reloading
 
   await openBoard(page);
   await page.getByLabel("Filter prices").fill("latur");

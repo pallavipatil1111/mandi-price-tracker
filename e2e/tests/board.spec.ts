@@ -63,6 +63,7 @@ test("CSV export downloads the series with a moving average", async ({ page, req
   await page.getByLabel("Filter prices").fill("sangli");
   await page.getByTestId("board").locator("tbody tr").filter({ hasText: "Turmeric" }).click();
   await page.getByRole("button", { name: "30D" }).click();
+  await expect(page.getByTestId("csv")).toHaveAttribute("href", /days=30/); // wait for the re-render
   const href = await page.getByTestId("csv").getAttribute("href");
   expect(href).toContain("days=30");
   const res = await request.get(href!);

@@ -5,6 +5,7 @@ test("admin sees the import log and a manual re-import changes nothing", async (
   await signedIn(page, await tokenFor(request, ADMIN.email, ADMIN.password));
   await page.goto("/#/admin");
   const runs = page.getByTestId("runs").locator("tbody tr").filter({ has: page.locator(".pill") });
+  await expect(runs.first()).toBeVisible(); // count() does not wait for the table to load
   const before = await runs.count();
   expect(before).toBeGreaterThanOrEqual(2);
   await expect(page.getByTestId("runs")).toContainText("backfill");
